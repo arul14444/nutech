@@ -31,7 +31,7 @@ class ProdukRepository
         return $this->produkModel->create($data);
     }
 
-    public function update($data, $uuid)
+    public function update($uuid,$data)
     {
         return $this->produkModel->where('uuid', $uuid)->update($data);
     }

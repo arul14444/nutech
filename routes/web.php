@@ -17,7 +17,7 @@ Route::post('/registrasi', [AuthController::class, 'register']) ->name('submit.r
 
 Route::post('/store-produk', [ProdukController::class, 'store']) ->name('store.produk');
 Route::delete('/delete-produk/{uuid}', [ProdukController::class, 'delete']);
-Route::put('/update-produk', [ProdukController::class, 'update']) ->name('update.produk');
+Route::put('/update-produk/{uuid}', [ProdukController::class, 'update']) ->name('update.produk');
 
 
  

@@ -27,11 +27,21 @@ class ViewController extends Controller
         return view('Registrasi');
     }
 
-    public function daftarProduk()
+    public function daftarProduk(Request $request)
     {
+        $search = $request->input('search');
+        $kd_kategori = $request->input('kd_kategori');
+        $dataProduk=$this->produkRepository->getProduk();
+        if ($search) {
+            $dataProduk = $dataProduk->where('produk.nama_produk', 'like', '%' . $search . '%');
+        }if ($kd_kategori) {
+            $dataProduk = $dataProduk->where('produk.kd_kategori', $kd_kategori);
+        }
+
         $data = [
-            'produk' => $this->produkRepository->getProduk()->get(),
-            'kategori' => $this->kategoriRepository->getAll()];
+            'produk' => $dataProduk->paginate(10),
+            'kategori' => $this->kategoriRepository->getAll()
+        ];
 
         return view('DaftarProduk')->with('data', $data);
     }

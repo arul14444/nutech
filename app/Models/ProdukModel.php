@@ -16,9 +16,10 @@ class ProdukModel extends Model
         'kd_kategori',
         'stok',
         'path_gambar',
+        'nama_gambar',
         'id',
         'uuid',
     ];
-    protected $hidden = ['created_at', 'updated_at','id'];
+    protected $hidden = ['created_at', 'updated_at', 'id'];
     public $timestamps = false;
 }
