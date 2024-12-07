@@ -20,10 +20,15 @@
                     <span>Profil</span>
                 </a>
             </li>
-                <a href="#" class="flex items-center space-x-3 py-3 px-4 rounded-md hover:bg-[#f23c2e] transition-all">
-                    <img src="{{asset('Assets/SignOut.png')}}" alt="">
-                    <span>Logout</span>
-                </a>
+                <li>
+                    <form action="/logout" method="POST" class="flex items-center space-x-3  rounded-md hover:bg-[#f23c2e] transition-all">
+                        @csrf
+                        <button type="submit" class="flex items-center space-x-3">
+                            <img src="{{asset('Assets/SignOut.png')}}" alt="Sign Out Icon">
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </li>
             </li>
         </ul>
     </div>

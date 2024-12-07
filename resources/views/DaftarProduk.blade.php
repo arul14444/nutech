@@ -2,6 +2,7 @@
 @section('title', 'Daftar Produk')
 
 @section('content')
+
 <div class="flex justify-between items-center mb-8">
     <h1 class="text-3xl font-semibold">Daftar Produk</h1>
 </div>
