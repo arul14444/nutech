@@ -6,6 +6,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/login', [ViewController::class, 'login'])->name('login');
 Route::post('/login/sistem', [AuthController::class, 'login']) ->name('login.sistem'); ;
 Route::get('/registrasi/view', [ViewController::class, 'registerView']) ->name('register');
