@@ -17,7 +17,7 @@ class ProdukRepository
     public function getProduk()
     {
         return ProdukModel::from('produk')
-            ->select('produk.nama_produk', 'produk.harga_barang', 'kategori.kategori', 'produk.harga_jual', 'produk.path_gambar', 'produk.stok', 'produk.uuid')
+            ->select('produk.nama_produk', 'produk.harga_barang', 'kategori.kategori', 'produk.harga_jual', 'produk.stok', 'produk.uuid')
             ->leftJoin('kategori', 'produk.kd_kategori', '=', 'kategori.kd_kategori');
     }
 
