@@ -17,8 +17,9 @@
             </div>
             <select class="block p-2 text-sm text-black border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500" id="filterKategori" name="filter_kategori" aria-label="Filter Kategori">
                 <option value="">Semua</option>
-                <option value="alat_olahraga">Alat Olahraga</option>
-                <option value="alat_musik">Alat Musik</option>
+                @foreach($data['kategori'] as $kategori)
+                    <option value="{{ $kategori->kd_kategori }}">{{ $kategori->kategori }}</option>
+                @endforeach
             </select>
         </div>
         <div class="flex space-x-2">
@@ -46,19 +47,25 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($data['produk'] as $index => $produk)
             <tr class="bg-white hover:bg-gray-100">
-                <td class="px-6 py-4">1</td>
-                <td class="px-6 py-4">Produk A</td>
-                <td class="px-6 py-4">Kategori 1</td>
-                <td class="px-6 py-4">Rp. 50.000</td>
-                <td class="px-6 py-4">10</td>
-                <td class="px-6 py-4">50</td>
-                <td class="px-6 py-4">Rp. 500.000</td>
-                <td class="px-6 py-4">
-                    <button class="px-4 rounded-md"><img src="{{asset('Assets/edit.png')}}"></button>
-                    <button class="px-4 py-2 rounded-md"><img src="{{asset('Assets/delete.png')}}"></button>
+                <td class="px-6 py-4">{{ $index + 1 }}</td>
+                <td class="px-6 py-4"><img src="{{ asset($produk->path_gambar) }}" alt="{{ $produk->nama_produk }}" class="w-10 h-10"></td>
+                <td class="px-6 py-4">{{ $produk->nama_produk }}</td>
+                <td class="px-6 py-4">{{ $produk->kategori }}</td>
+                <td class="px-6 py-4">{{ number_format($produk->harga_barang, 0, ',', '.') }}</td>
+                <td class="px-6 py-4">{{ number_format($produk->harga_jual, 0, ',', '.') }}</td>
+                <td class="px-6 py-4">{{ $produk->stok }}</td>
+                <td class="px-6 py-4 flex space-x-2">
+                    <a href="/edit-produk/{{$produk->uuid}}" class="px-4 rounded-md flex items-center justify-center"><img src="{{asset('Assets/edit.png')}}" class="w-5 h-5"></a>
+                    <form action="/delete-produk/{{$produk->uuid}}" method="POST" class="px-4 py-2 rounded-md flex items-center justify-center">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"><img src="{{asset('Assets/delete.png')}}" class="w-5 h-5"></button>
+                    </form>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

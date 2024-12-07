@@ -27,7 +27,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->uuid =  Str::uuid()->toString();
-        $user->save();
+    
 
         
         return redirect('/');

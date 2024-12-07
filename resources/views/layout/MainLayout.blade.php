@@ -11,19 +11,31 @@
 <body>
 
     <div class="flex h-screen">
-
-        <!-- Sidebar -->
-       
         @include('layout.Sidebar')
-        <!-- Main Content -->
+        <div class="absolute top-4 right-4 w-1/4">
+            <div class="bg-white rounded p-4" id="responseMessage">
+            @if(session('alert'))
+            <div class="bg-red-500 text-white p-2 rounded">
+                {{ session('alert') }}
+            </div>
+            @elseif(session('success'))
+            <div class="bg-green-500 text-white p-2 rounded">
+                {{ session('success') }}
+            </div>
+            @endif  
+            </div>
+        </div>
         <div class="flex-1 p-8">
-            <!-- Header -->
             <div class="grid gap-6">
                 @yield('content')
             </div>
         </div>
 
     </div>
-
+    <script>
+        setTimeout(function() {
+            document.getElementById('responseMessage').innerHTML = '';
+        }, 5000);
+    </script>
 </body>
 </html>

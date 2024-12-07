@@ -5,31 +5,31 @@
 <div class="flex items-center ">
     <h1 class="text-3xl font-semibold text-gray-500 mr-4">Daftar Produk</h1> 
     <h1 class="text-3xl font-semibold mr-4"><</h1>
-    <h1 class="text-3xl font-semibold">Tambah Produk</h1>
+    <h1 class="text-3xl font-semibold">Edit Produk</h1>
 </div>
-<form action="{{ route('store.produk') }}" method="POST" enctype="multipart/form-data">  
-    @csrf      
+
+<form action="">        
     <div class="grid gap-2 mb-2 md:grid-cols-3">
+
         <div>
             <label for="filterKategori" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
             <select class="block p-2 text-sm text-black border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 w-full" id="filterKategori" name="kategori" aria-label="Filter Kategori">
             <option disabled selected>Pilih kategori</option>
-            @foreach($data['kategori'] as $kategori)
-                <option value="{{ $kategori->kd_kategori }}">{{ $kategori->kategori }}</option>
-            @endforeach
+            <option value="alat_olahraga">Alat Olahraga</option>
+            <option value="alat_musik">Alat Musik</option>
             </select>
         </div>
         <div class="md:col-span-2">
             <label for="namaProduk" class="block mb-2 text-sm font-medium text-gray-900">Nama Barang</label>
-            <input type="text" id="namaProduk" name="nama_produk" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukan nama barang" required />
+            <input type="text" id="namaProduk" name="nama_barang" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukan nama barang" required />
         </div>
         <div>
             <label for="hargaBeli" class="block mb-2 text-sm font-medium text-gray-900">Harga Beli</label>
-            <input type="text" id="hargaBeli" name="harga_barang" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukan harga beli" required />
+            <input type="text" id="hargaBeli" name="harga_beli" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukan harga beli" required />
         </div>
         <div>
             <label for="hargaJual" class="block mb-2 text-sm font-medium text-gray-900">Harga Jual</label>
-            <input  disabled type="text" id="hargaJual" name="harga_jual" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="masukan harga jual" required readonly />
+            <input type="text" id="hargaJual" name="harga_jual" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="masukan harga jual" required />
         </div>  
         <div>
             <label for="stokBarang" class="block mb-2 text-sm font-medium text-gray-900">Stok Barang</label>
@@ -58,18 +58,7 @@
             reader.readAsDataURL(event.target.files[0]);
             document.getElementById('file-name').textContent = event.target.files[0].name;
             }
-
-            document.getElementById('hargaBeli').addEventListener('input', function() {
-            let hargaBeli = parseInt(this.value);
-            if (!isNaN(hargaBeli)) {
-                let hargaJual = hargaBeli + (hargaBeli * 0.30);
-                document.getElementById('hargaJual').value = hargaJual.toFixed(2);
-                document.getElementById('hargaJual').removeAttribute('disabled');
-            } else {
-                document.getElementById('hargaJual').value = '';
-                document.getElementById('hargaJual').setAttribute('disabled', 'disabled');
-            }
-            });
+        </script>
         </script>
         <div class="md:col-span-3 flex justify-end">
             <a href="{{ route('daftar-produk') }}" class="bg-white border border-blue-500 text-blue-500 text-sm rounded-lg p-2.5 mr-2">Batalkan</a>
@@ -79,24 +68,3 @@
     </div>
 </form>
 @endsection
-@push('scripts')
-<script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        let hargaBeli = parseFloat(document.getElementById('hargaBeli').value);
-        let hargaJual = parseFloat(document.getElementById('hargaJual').value);
-        let stokBarang = parseInt(document.getElementById('stokBarang').value);
-
-        if (isNaN(hargaBeli) || isNaN(hargaJual) || isNaN(stokBarang)) {
-            alert('Harga dan stok harus berupa angka.');
-            event.preventDefault();
-            return;
-        }
-
-        let expectedHargaJual = hargaBeli + (hargaBeli * 0.30);
-        if (hargaJual !== expectedHargaJual) {
-            alert('Harga jual harus 30% lebih tinggi dari harga beli.');
-            event.preventDefault();
-        }
-    });
-</script>
-@endpush
