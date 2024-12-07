@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
@@ -15,12 +16,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/tambah-produk', [ViewController::class, 'tambahProduk'])->name('tambah-produk');
     Route::get('/edit-produk/{uuid}', [ViewController::class, 'editProduk']);
     Route::get('/profil', [ViewController::class, 'profil'])->name('profil');
+    Route::get('/export', [ExportController::class, 'exportExcel'])->name('export');
 
     Route::post('/store-produk', [ProdukController::class, 'store'])->name('store.produk');
     Route::delete('/delete-produk/{uuid}', [ProdukController::class, 'delete']);
     Route::put('/update-produk/{uuid}', [ProdukController::class, 'update'])->name('update.produk');
     Route::post('/registrasi', [AuthController::class, 'register'])->name('submit.register');
 });
+
 
 
 

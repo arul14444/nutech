@@ -26,10 +26,14 @@
         </div>
        </form>
         <div class="flex space-x-2">
-            <a href="#" class="px-4 py-2 bg-[#19761c] text-white rounded-md flex items-center space-x-2">
-                <img src="{{asset('Assets/ExcelLogo.png')}}" class="w-5 h-5"> 
-                <span>Exsport excel</span>
-            </a>
+            <form id="exportForm" action="export" method="GET">
+                <input type="hidden" name="search" value="{{ request('search') }}">
+                <input type="hidden" name="kd_kategori" value="{{ request('kd_kategori') }}">
+                <button type="submit" class="px-4 py-2 bg-[#19761c] text-white rounded-md flex items-center space-x-2">
+                    <img src="{{asset('Assets/ExcelLogo.png')}}" class="w-5 h-5"> 
+                    <span>Export excel</span>
+                </button>
+            </form>
             <a href="{{ route('tambah-produk') }}" class="px-4 py-2 bg-[#f23c2e] text-white rounded-md flex items-center space-x-2">
                 <img src="{{asset('Assets/PlusCircle.png')}}" class="w-5 h-5"> 
                 <span>Tambah Produk</span>
