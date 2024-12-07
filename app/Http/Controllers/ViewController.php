@@ -11,7 +11,7 @@ class ViewController extends Controller
         return view('Login');
     }
 
-    public function register()
+    public function registerView()
     {
         return view('Registrasi');
     }
@@ -31,7 +31,7 @@ class ViewController extends Controller
         return view('EditProduk');
     }
 
-    public function profi()
+    public function profil()
     {
         return view('Profil');
     }
